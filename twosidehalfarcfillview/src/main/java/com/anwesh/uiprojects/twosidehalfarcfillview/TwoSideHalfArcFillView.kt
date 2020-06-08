@@ -16,7 +16,7 @@ import android.app.Activity
 val nodes : Int = 5
 val arcs : Int = 2
 val parts : Int = 3
-val scGap : Float = 0.2f / parts
+val scGap : Float = 0.02f / parts
 val strokeFactor : Float = 90f
 val sizeFactor : Float = 2.9f
 val foreColor : Int = Color.parseColor("#3F51B5")
@@ -38,7 +38,9 @@ fun Canvas.drawTwoSideHalfArc(i : Int, scale : Float, w : Float, size : Float, p
     save()
     scale(1f - 2 * i, 1f)
     translate((w / 2 - size) * (1 - sf2), 0f)
+    paint.style = Paint.Style.STROKE
     drawArc(RectF(-size, -size, size, size), start, rot * sf1, false, paint)
+    paint.style = Paint.Style.FILL
     drawArc(RectF(-size, -size, size, size), start, rot * sf3, true, paint)
     restore()
 }
@@ -53,7 +55,7 @@ fun Canvas.drawTSHANode(i : Int, scale : Float, paint : Paint) {
     paint.strokeWidth = Math.min(w, h) / strokeFactor
     save()
     translate(w / 2, gap * (i + 1))
-    for (j in 0..1) {
+    for (j in 0..(arcs - 1)) {
         drawTwoSideHalfArc(j, scale, w, size, paint)
     }
     restore()

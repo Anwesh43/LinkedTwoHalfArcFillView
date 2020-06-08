@@ -212,4 +212,13 @@ class TwoSideHalfArcFillView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : TwoSideHalfArcFillView {
+            val view : TwoSideHalfArcFillView = TwoSideHalfArcFillView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
